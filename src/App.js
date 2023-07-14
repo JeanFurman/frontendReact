@@ -1,5 +1,6 @@
 import './App.css';
 import Filtro from './components/Filtro'
+import Saldo from './components/Saldo'
 
 function App() {
   return (
@@ -13,6 +14,12 @@ function App() {
         </div>
         <button className='btnPesquisa'>Pesquisar</button>
       </form>
+      <div className='divApp'>
+        <Saldo />
+        <div>
+          
+        </div>
+      </div>
     </div>
   );
 }
