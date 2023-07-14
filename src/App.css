@@ -9,3 +9,35 @@
   margin: 3em 25em 5em 25em;
 }
 
+.App .btnPesquisa {
+  margin-top: 5em;
+  padding: 10px 20px;
+  border: none;
+  background-color: rgb(154, 252, 255);
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.App .btnPesquisa:hover {
+  background-color: rgb(63, 147, 150);
+  color: white;
+}
+
+.formApp {
+  text-align: right;
+  padding: 4em 0 4em 0;
+}
+
+.divForm {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  text-align: left;
+}
+
+.divApp {
+  width: fit-content;
+  border: 1px solid black;
+  padding: 7px;
+}
