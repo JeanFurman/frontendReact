@@ -1,5 +1,9 @@
 .saldo {
     display: flex;
-    justify-content: space-between;
     font-size: 18px;
+    padding: 8px;
+}
+
+.saldo p{
+    padding-right: 5em;
 }
