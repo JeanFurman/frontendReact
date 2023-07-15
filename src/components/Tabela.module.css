@@ -1,0 +1,20 @@
+.divTabela {
+    border: 1px solid black;
+    background-color: #fff;
+}
+
+.tabelaDados {
+    text-align: left;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+    margin-top: 0;
+    table-layout: auto;
+}
+
+.tabelaDados thead tr th,
+.tabelaDados tbody tr td {
+    border: 1px solid #000;
+    padding: 8px;
+    width: 25%;
+}
