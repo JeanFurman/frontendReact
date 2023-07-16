@@ -3,6 +3,25 @@
     background-color: #fff;
 }
 
+.divTabela div {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonPage{
+    margin-right: 15px;
+    font-size: 16px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.buttonPage:hover{
+    color: aqua;
+}
+
 .tabelaDados {
     text-align: left;
     width: 100%;

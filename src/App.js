@@ -7,20 +7,26 @@ function App() {
 
   const [transferencias, setTransferencias] = useState([])
   const [dados, setDados] = useState([])
+  var [url, setUrl] = useState('')
 
-  const loadTransferencias = () => {
-        fetch('http://localhost:8080/api/transferencias')
+  const loadTransferencias = (urlParam) => {
+      let u = ''
+      if(url !== ''){
+        u = url
+      }else{
+        u=urlParam
+      }
+      fetch(u)
       .then((resp) =>  resp.json() )
       .then((data) => {
         setTransferencias(data)
-        console.log(data)
       })
       .catch((err) => console.log(err))
   }
 
   const filtroTransferencias = (e) => {
     e.preventDefault()
-    var url = 'http://localhost:8080/api/transferencias'
+    setUrl('http://localhost:8080/api/transferencias')
 
     if(dados.id){
       url += `/${dados.id}`
@@ -31,17 +37,25 @@ function App() {
         url += `nome=${dados.nome}&`
       }
       if(dados.dataInicio && dados.dataFim){
-        url += `dataInicio=${dados.dataInicio}&dataFim=${dados.dataFim}`
+        url += `dataInicio=${dados.dataInicio}&dataFim=${dados.dataFim}&`
       }
     }
+    loadTransferencias()
+  }
 
-    fetch(url)
-    .then((resp) =>  resp.json() )
-    .then((data) => {
-    setTransferencias(data)
-    console.log(data)
-    })
-    .catch((err) => console.log(err))
+  function pages(p){
+    let regexPage = new RegExp('/page=/')
+    if(!regexPage.test(url)){
+      let regexUrl = new RegExp('/&$/')
+      if(regexUrl.test(url)){
+        url += `page=${p}&`
+      }else{
+        url += `?page=${p}&`
+      }
+    }else{
+      url = url.replace('/(page=)\d+/', `$${p}`)
+    }
+    loadTransferencias()
   }
 
   const handleChange = (e) => {
@@ -50,7 +64,8 @@ function App() {
 
 
   useEffect(() => {
-      loadTransferencias()
+    loadTransferencias('http://localhost:8080/api/transferencias')
+    setUrl('http://localhost:8080/api/transferencias')
   }, [])
 
   return (
@@ -66,7 +81,7 @@ function App() {
       </form>
       <div className='divApp'>
           {transferencias.content !== undefined && transferencias.content.length > 0 ?
-            <Tabela t={transferencias}/>
+            <Tabela t={transferencias} pages={pages}/>
             : <></>}
           
         </div>
