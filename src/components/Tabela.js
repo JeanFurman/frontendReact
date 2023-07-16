@@ -29,7 +29,7 @@ export default function Tabela({t, pages}){
     return (
         <div className={`${styles.divTabela}`}>
             {transferencias.content !== undefined ?
-            <Saldo/>
+            <Saldo somaTotal={transferencias.somaTotal} somaPeriodo={transferencias.somaPeriodo}/>
             :<></>}
             <table className={`${styles.tabelaDados}`}>
             <thead>
@@ -54,7 +54,7 @@ export default function Tabela({t, pages}){
                 
             </tbody>    
             </table>
-            <div>
+            <div className={`${styles.divPage}`}>
                 
                 <button disabled={count === 0 } style={count === 0 ? {color: '#e1e1e1'}: null} className={`${styles.buttonPage}`} onClick={(e) => setPages(e, 0)}>&lt;&lt;</button>
                 <button disabled={count === 0 } style={count === 0 ? {color: '#e1e1e1'}: null} className={`${styles.buttonPage}`} onClick={(e) => setPages(e, (count-1))}>&lt;</button>

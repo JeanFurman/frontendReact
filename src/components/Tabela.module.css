@@ -3,7 +3,7 @@
     background-color: #fff;
 }
 
-.divTabela div {
+.divTabela .divPage {
     padding: 12px;
     display: flex;
     align-items: center;
