@@ -9,13 +9,11 @@ function App() {
   const [dados, setDados] = useState([])
   var [url, setUrl] = useState('')
 
-  const loadTransferencias = (urlParam) => {
-      let u = ''
+  const loadTransferencias = (u) => {
       if(url !== ''){
         u = url
-      }else{
-        u=urlParam
       }
+      console.log("url load -- " + url)
       fetch(u)
       .then((resp) =>  resp.json() )
       .then((data) => {
@@ -26,35 +24,42 @@ function App() {
 
   const filtroTransferencias = (e) => {
     e.preventDefault()
-    setUrl('http://localhost:8080/api/transferencias')
+    var u = 'http://localhost:8080/api/transferencias'
 
     if(dados.id){
-      url += `/${dados.id}`
+      u += `/${dados.id}`
     }
     else{
-      url += '?'
+      u += '?'
       if(dados.nome){
-        url += `nome=${dados.nome}&`
+        u += `nome=${dados.nome}&`
       }
       if(dados.dataInicio && dados.dataFim){
-        url += `dataInicio=${dados.dataInicio}&dataFim=${dados.dataFim}&`
+        u += `dataInicio=${dados.dataInicio}&dataFim=${dados.dataFim}&`
       }
     }
-    loadTransferencias()
+    setUrl(u)
+    fetch(u)
+      .then((resp) =>  resp.json() )
+      .then((data) => {
+        setTransferencias(data)
+        console.log(data)
+      })
+      .catch((err) => console.log(err))
   }
 
   function pages(p){
-    let regexPage = new RegExp('/page=/')
-    if(!regexPage.test(url)){
-      let regexUrl = new RegExp('/&$/')
-      if(regexUrl.test(url)){
+    if(!url.includes('page')){
+      if(url.endsWith('&')){
+        console.log('entrei')
         url += `page=${p}&`
       }else{
         url += `?page=${p}&`
       }
     }else{
-      url = url.replace('/(page=)\d+/', `$${p}`)
+      url = url.replace(/(page=)\d+/, `$1${p}`)
     }
+    setUrl(url)
     loadTransferencias()
   }
 
