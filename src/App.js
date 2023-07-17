@@ -19,7 +19,7 @@ function App() {
       .then((data) => {
         setTransferencias(data)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => alert("Erro no loading!"))
   }
 
   const filtroTransferencias = (e) => {
@@ -43,15 +43,13 @@ function App() {
       .then((resp) =>  resp.json() )
       .then((data) => {
         setTransferencias(data)
-        console.log(data)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => alert("Dados inválidos!"))
   }
 
   function pages(p){
     if(!url.includes('page')){
-      if(url.endsWith('&')){
-        console.log('entrei')
+      if(url.endsWith('&') || url.endsWith('?')){
         url += `page=${p}&`
       }else{
         url += `?page=${p}&`
