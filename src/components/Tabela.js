@@ -26,6 +26,11 @@ export default function Tabela({t, pages}){
       }
     }
 
+    function formataData(dataT){
+        const date = new Date(dataT);
+        return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear()}`;
+    }
+
     return (
         <div className={`${styles.divTabela}`}>
             {transferencias.content !== undefined ?
@@ -34,7 +39,7 @@ export default function Tabela({t, pages}){
             <table className={`${styles.tabelaDados}`}>
             <thead>
                 <tr>
-                <th scope="col">{count}</th>
+                <th scope="col">Data</th>
                 <th scope="col">Valencia</th>
                 <th scope="col">Tipo</th>
                 <th scope="col">Nome do operador transacionado</th>
@@ -44,9 +49,9 @@ export default function Tabela({t, pages}){
             
             {transferencias.content !== undefined && transferencias.content.length > 0 ?
              transferencias.content.map((t) => (
-                <tr>
-                    <td>{t.dataTransferencia}</td>
-                    <td>{t.valor}</td>
+                <tr> 
+                    <td>{formataData(t.dataTransferencia)}</td>
+                    <td>R$ {t.valor}</td>
                     <td>{t.tipo}</td>
                     <td>{t.nomeOperadorTransacao}</td>
                 </tr>
